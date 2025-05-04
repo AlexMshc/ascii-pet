@@ -1,0 +1,122 @@
+{
+  "swagger": "2.0",
+  "host": "localhost:8000",
+  "basePath": "/v1",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "info": {
+    "description": "The goal of this task is to implement REST API and SPA to cover the described OpenAPI specification.",
+    "version": "0.0.1",
+    "title": "Yadro Impulse Test Task",
+    "contact": {
+      "email": "edu@yadro.com",
+      "url": "https://edu.yadro.com/impulse/"
+    }
+  },
+  "paths": {
+    "/pet": {
+      "get": {
+        "tags": [
+          "pet"
+        ],
+        "description": "Get existing pet",
+        "operationId": "GetPet",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PetProperties"
+            }
+          },
+          "204": {
+            "description": "No pet uploaded yet"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "pet"
+        ],
+        "description": "Upload new pet",
+        "operationId": "UploadPet",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "petProperties",
+            "required": true,
+            "description": "Pet properties",
+            "schema": {
+              "$ref": "#/definitions/PetProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "Delete uploaded pet",
+        "operationId": "DeletePet",
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PetProperties": {
+      "type": "object",
+      "required": [
+        "ascii",
+        "description"
+      ],
+      "properties": {
+        "ascii": {
+          "type": "string",
+          "description": "Pet photo in ASCII art format",
+          "minLength": 1,
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of pet on the photo",
+          "minLength": 1,
+          "x-nullable": false
+        }
+      },
+      "example": {
+        "ascii": "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣠⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣄⣀⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⠟⠛⠛⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠛⣷⡄⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡇⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡶⠀⠀⠀⠀⠀⠀⠀⢠⡀⠀⠀⢸⣧⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠛⠂⠀⠀⢰⠇⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠃⠀⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠀⣰⣶⣶⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡏⠀⠀⣀⣀⡀⠀⠀\n⢀⣀⣀⣀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⢠⣦⠀⠀⠀⠀⢰⡇⠀⣿⠁⠀⠉⠻⣦⡀⠠⠟⠀⠀⠀⠀⣿⣧⣶⠿⠛⠙⣿⠀⠀\n⣿⡋⠉⠙⠛⠷⣦⣄⠀⠀⣿⡇⠀⠀⠀⠠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠈⠻⣦⣀⣀⣀⣀⣰⣿⠟⠁⠀⠀⠀⣿⠀⠀\n⠸⣷⡀⠀⠀⠀⠈⠛⣷⡄⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠟⠀⠀⢸⣇⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⣿⡀⠀\n⠀⠘⢿⣆⠀⠀⠀⠀⠈⢿⣿⡇⠀⠀⠀⠀⠀⠐⠟⠀⠀⠀⠀⡀⠀⢀⣴⡿⠃⠀⠀⠀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⠀⠀⠙⣷⡄\n⠀⠀⠀⠙⢷⣤⡀⠀⠀⠈⢿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢼⠇⠀⣼⡏⠀⠀⠀⠀⣾⣅⣀⣿⠀⠀⠀⠀⠀⠀⠀⣾⣅⢈⣷⠀⠀⠈⣿\n⠀⠀⠀⠀⠀⠙⠿⣦⣀⠀⢸⡇⠀⠀⠀⠀⣰⡄⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠘⠻⠿⠟⠀⠀⠠⣖⢒⡶⠀⠙⠿⠿⠟⠀⠀⠀⣿\n⠀⠀⠀⠀⠀⠀⠀⠈⠛⢷⣾⡇⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠀⢸⣧⠀⠀⠀⠀⠀⠀⢠⡄⠀⠀⠀⢈⣏⠀⠀⠀⠀⡀⠀⠀⠀⢀⣿\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣽⡇⠀⠀⠀⠀⠀⠠⡆⠀⠀⠀⢰⡆⠀⠀⢻⣧⡀⠀⠀⠀⠀⠈⠻⠶⣤⡴⠟⠙⠶⣤⡤⠞⠁⠀⠀⢀⣾⠏\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣻⣧⣄⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣙⣿⣶⣤⣄⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣤⣤⣶⠿⠋⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⡟⠉⠉⠛⣿⠛⢻⠿⠿⠿⠿⣿⡿⠿⠛⠛⠛⠛⠛⣿⠛⠉⠙⠛⣿⠛⠛⣿⠟⠛⠛⢻⡏⠉⠉⠉⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣦⣀⣤⡾⠃⠀⣿⣀⣀⣠⣾⠟⠀⠀⠀⠀⠀⠀⠀⢿⣄⣀⣀⣴⠟⠀⠀⣿⠀⠀⢀⣾⠃⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠁⠀⠀⠀⠈⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠁⠀⠀⠀⠙⠷⠶⠟⠃⠀⠀⠀⠀⠀⠀⠀⠀",
+        "description": "The nyan cat"
+      }
+    }
+  }
+}
